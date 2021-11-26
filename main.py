@@ -11,6 +11,8 @@ from linebot.models import (
 )
 import os
 
+import psycopg2
+
 app = Flask(__name__)
 
 #環境変数取得
@@ -19,6 +21,27 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
+
+def get_connection():
+    dsn = "host=ec2-3-230-199-240.compute-1.amazonaws.com port=5432 dbname=ddncsqqgstd7dp user=udydsahzfderba password=e44058d3925eea26d2ba930f7700b74631b63d5b44534bc13e5b246f1c31cbc9"
+    return psycopg2.connect(dsn)
+
+def get_response_message(mes_from):
+    # "日付"が入力された時だけDBアクセス
+    if mes_from=="日付":
+        with get_connection() as conn:
+            with conn.cursor(name="cs") as cur:
+                try:
+                    sqlStr = "SELECT TO_CHAR(CURRENT_DATE, 'yyyy/mm/dd');"
+                    cur.execute(sqlStr)
+                    (mes,) = cur.fetchone()
+                    return mes
+                except:
+                    mes = "exception"
+                    return mes
+
+    # それ以外はオウム返し
+    return mes_from
 
 @app.route("/callback", methods=['POST'])
 def callback():
@@ -42,7 +65,7 @@ def callback():
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(text=event.message.text))
+        TextSendMessage(get_response_message(event.message.text)))
 
 
 if __name__ == "__main__":
