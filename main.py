@@ -32,7 +32,7 @@ def get_response_message(mes_from):
         with get_connection() as conn:
             with conn.cursor(name="cs") as cur:
                 try:
-                    cur.execute('SELECT * FROM users')
+                    cur.execute('SELECT * FROM sample')
                     rows = cur.fetchall()
                     return rows
                 except:
