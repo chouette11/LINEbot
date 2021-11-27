@@ -34,7 +34,7 @@ def get_response_message(mes_from):
                 try:
                     cur.execute('SELECT * FROM sample')
                     rows = cur.fetchall()
-                    return rows
+                    return cur.exists("sample")
                 except:
                     mes = "exception"
                     return mes
