@@ -32,10 +32,9 @@ def get_response_message(mes_from):
         with get_connection() as conn:
             with conn.cursor(name="cs") as cur:
                 try:
-                    sqlStr = "SELECT TO_CHAR(CURRENT_DATE, 'yyyy/mm/dd');"
-                    cur.execute(sqlStr)
-                    (mes,) = cur.fetchone()
-                    return mes
+                    cur.execute('SELECT * FROM users')
+                    rows = cur.fetchall()
+                    return rows
                 except:
                     mes = "exception"
                     return mes
