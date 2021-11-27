@@ -32,9 +32,9 @@ def get_response_message(mes_from):
         with get_connection() as conn:
             with conn.cursor(name="cs") as cur:
                 try:
-                    cur.execute('UPDATE product SET name=\'fukuda\'')
+                    aa = cur.execute_query('SELECT * FROM product')
                     rows = cur.fetchall()
-                    return cur.exists("sample")
+                    return aa
                 except:
                     mes = "exception"
                     return mes
