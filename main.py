@@ -33,7 +33,8 @@ def get_response_message(mes_from):
             with conn.cursor(name="cs") as cur:
                 try:
                     return cur.get_column_list('product')
-                except:
+                except Exception as e:
+                    print(e)
                     mes = "exception"
                     return mes
 
