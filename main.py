@@ -4,12 +4,14 @@ from linebot import (
     LineBotApi, WebhookHandler
 )
 from linebot.exceptions import (
-    InvalidSignatureError
+    InvalidSignatureError, 
 )
 from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
+    MessageEvent, TextMessage, TextSendMessage, TemplateSendMessage
 )
 import os
+from linebot.models.actions import MessageAction, PostbackAction, URIAction
+from linebot.models.template import ButtonsTemplate
 
 import psycopg2
 
@@ -28,15 +30,15 @@ def get_connection():
 
 def get_response_message(mes_from):
     # "日付"が入力された時だけDBアクセス
-    if mes_from=="日付":
-        with get_connection() as conn:
-            with conn.cursor(name="cs") as cur:
-                try:
-                    return cur.get_column_list('product')
-                except Exception as e:
-                    print(e)
-                    mes = "exception"
-                    return mes
+    with get_connection() as conn:
+        with conn.cursor() as cur:
+            try:
+                cur.execute('INSERT INTO product (id, price, age, name) VALUES (%s, %s, %s, %s)', (3, 100, 20, a))
+                cur.execute('SELECT * from product;')
+                return 
+            except:
+                mes = "exception"
+                return mes
 
     # それ以外はオウム返し
     return mes_from
@@ -63,7 +65,29 @@ def callback():
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
-        TextSendMessage(get_response_message(event.message.text)))
+        TemplateSendMessage(
+    alt_text='Buttons template',
+    template=ButtonsTemplate(
+        thumbnail_image_url='https://example.com/image.jpg',
+        title='Menu',
+        text='Please select',
+        actions=[
+            PostbackAction(
+                label='postback',
+                display_text='postback text',
+                data='action=buy&itemid=1'
+            ),
+            MessageAction(
+                label='message',
+                text='message text'
+            ),
+            URIAction(
+                label='uri',
+                uri='http://example.com/'
+            )
+        ]
+    )
+))
 
 
 if __name__ == "__main__":
