@@ -84,7 +84,7 @@ def handle_message(event):
                             PostbackAction(
                                 label='postback1',
                                 display_text='postback text1',
-                                data='action=buy&itemid=1'
+                                data='action=aaa'
                             ),
                             MessageAction(
                                 label='message1',
