@@ -87,7 +87,7 @@ def handle_message(event):
                 "text": "LINEbotをpythonを用いて作成します！"
             },
             {
-                "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.png',
+                "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.jpg',
                 "title": '電卓アプリ',
                 "text": "電卓のアプリをFlutterを用いて１から作成します！"
             }
