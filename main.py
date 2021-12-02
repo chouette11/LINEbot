@@ -92,7 +92,21 @@ def handle_message(event):
                             )
                         ]
                     ),
-                    intro.intro_carousel('LINEbot', 'LINEbotをpythonを用いて作成します。', 'https://fathomless-sierra-30007.herokuapp.com/static/images/java.png'),
+                    CarouselColumn(
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/static/images/java.png',
+                        title='LINEbot',
+                        text='LINEbotをpythonを用いて作成します。',
+                        actions=[
+                            MessageAction(
+                                label='詳細',
+                                text='LINEbot' + ' 詳細'
+                            ),
+                            MessageAction(
+                                label='これにする！',
+                                text='LINEbot'
+                            )
+                        ]
+                    ),
                     CarouselColumn(
                         thumbnail_image_url='https://ascii.jp/img/2020/02/26/2355326/o/7a804288de5f6df7.jpg',
                         title='電卓アプリ',
