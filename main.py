@@ -92,26 +92,25 @@ def handle_message(event):
                 "text": "電卓のアプリをFlutterを用いて１から作成します！"
             }
         ]
-        
-        columns = [
-            CarouselColumn(
-                thumbnail_image_url=column['thumbnail_image_url'],
-                title=column['title'],
-                text=column['text'],
-                actions=[
-                    MessageAction(
-                        label='詳細',
-                        text=column['title']  + ' 詳細'
-                    ),
-                    MessageAction(
-                        label='これにする！',
-                        text=column['title']
-                    )
-                ]
-            )
 
-            for column in results
-        ]
+        for column in results: 
+            columns = [
+                CarouselColumn(
+                    thumbnail_image_url=column['thumbnail_image_url'],
+                    title=column['title'],
+                    text=column['text'],
+                    actions=[
+                        MessageAction(
+                            label='詳細',
+                            text=column['title']  + ' 詳細'
+                        ),
+                        MessageAction(
+                            label='これにする！',
+                            text=column['title']
+                        )
+                    ]
+                )
+            ]
 
         line_bot_api.reply_message(
             event.reply_token,
