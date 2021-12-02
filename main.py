@@ -70,7 +70,7 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://example.com/item1.jpg',
+                        thumbnail_image_url='https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
                         title='this is menu1',
                         text='description1',
                         actions=[
