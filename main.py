@@ -84,11 +84,6 @@ def handle_message(event):
                             MessageAction(
                                 label='これにする！',
                                 text='拡張機能'
-                            ),
-                            PostbackAction(
-                                label='postback1',
-                                display_text='postback text1',
-                                data='action=aaa'
                             )
                         ]
                     ),
