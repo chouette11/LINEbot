@@ -70,6 +70,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    
     line_bot_api.reply_message(
         event.reply_token,
         TemplateSendMessage(
@@ -92,7 +93,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/static/images/java.png',
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/static/images/line.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
@@ -107,7 +108,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://ascii.jp/img/2020/02/26/2355326/o/7a804288de5f6df7.jpg',
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.png',
                         title='電卓アプリ',
                         text='電卓のアプリを１からFlutterを用いて作成します！',
                         actions=[
