@@ -14,7 +14,6 @@ from linebot.models.actions import MessageAction, PostbackAction, URIAction
 from linebot.models.template import ButtonsTemplate, CarouselColumn, CarouselTemplate
 
 import psycopg2
-import intro
 
 app = Flask(__name__)
 
@@ -24,23 +23,6 @@ YOUR_CHANNEL_SECRET = os.environ["YOUR_CHANNEL_SECRET"]
 
 line_bot_api = LineBotApi(YOUR_CHANNEL_ACCESS_TOKEN)
 handler = WebhookHandler(YOUR_CHANNEL_SECRET)
-
-def intro_carousel(title, description, image_url):
-    CarouselColumn(
-        thumbnail_image_url=image_url,
-        title=title,
-        text=description,
-        actions=[
-            MessageAction(
-                label='詳細',
-                text=title + ' 詳細'
-            ),
-            MessageAction(
-                label='これにする！',
-                text=title
-            )
-        ]
-    )
 
 def get_connection():
     dsn = "host=ec2-3-230-199-240.compute-1.amazonaws.com port=5432 dbname=ddncsqqgstd7dp user=udydsahzfderba password=e44058d3925eea26d2ba930f7700b74631b63d5b44534bc13e5b246f1c31cbc9"
@@ -87,23 +69,6 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
-def intro_carousel(title, description, image_url):
-    CarouselColumn(
-        thumbnail_image_url=image_url,
-        title=title,
-        text=description,
-        actions=[
-            MessageAction(
-                label='詳細',
-                text=title + ' 詳細'
-            ),
-            MessageAction(
-                label='これにする！',
-                text=title
-            )
-        ]
-    ),
-
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
@@ -126,7 +91,21 @@ def handle_message(event):
                             )
                         ]
                     ),
-                    intro_carousel('LINEbot', 'LINEbotをpythonを用いて作成します。', 'https://teruteruahuro.herokuapp.com/static/images/java'),
+                    CarouselColumn(
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/static/images/java.png',
+                        title='LINEbot',
+                        text='LINEbotをpythonを用いて作成します！',
+                        actions=[
+                            MessageAction(
+                                label='詳細',
+                                text='LINEbot 詳細'
+                            ),
+                            MessageAction(
+                                label='これにする！',
+                                text='LINEbot'
+                            )
+                        ]
+                    ),
                     CarouselColumn(
                         thumbnail_image_url='https://ascii.jp/img/2020/02/26/2355326/o/7a804288de5f6df7.jpg',
                         title='電卓アプリ',
