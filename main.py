@@ -71,8 +71,9 @@ def callback():
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     if(event.message.text == "拡張機能 詳細"):
-        event.reply_token,
-        TextSendMessage(text='拡張機能の詳細です')
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text='拡張機能の詳細です'))
     else:
         line_bot_api.reply_message(
             event.reply_token,
