@@ -93,8 +93,8 @@ def handle_message(event):
             }
         ]
 
+        columns = []
         for column in results: 
-            columns = []
             columns.append(
             CarouselColumn(
                 thumbnail_image_url=column['thumbnail_image_url'],
