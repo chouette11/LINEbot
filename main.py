@@ -43,6 +43,10 @@ def get_response_message(mes_from):
     # それ以外はオウム返し
     return mes_from
 
+@app.route("/aaa", methods=['POST'])
+def aaa():
+
+
 @app.route("/callback", methods=['POST'])
 def callback():
     # get X-Line-Signature header value
@@ -81,7 +85,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://photos.google.com/u/1/share/AF1QipNws_rMj9mvVXEbovEicY2q1mI-S9jiD9KWSX95UP754CNfhjVpgdsQPv1Nf_NICw/photo/AF1QipP3Q0AmsCfFPHVOhsrZnmxY19I8oPGVuNRJAP16?key=Vlp5NEVfcV8tdm9LV2F3T3pua2ZaNkhqTnVQRXpR',
+                        thumbnail_image_url='Java.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
