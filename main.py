@@ -82,16 +82,24 @@ def handle_message(event):
                         text='chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！',
                         actions=[
                             MessageAction(
+                                label='詳細',
+                                text='拡張機能 詳細'
+                            ),
+                            MessageAction(
                                 label='これにする！',
                                 text='拡張機能'
                             )
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/java.png',
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/assets/images/java.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
+                            MessageAction(
+                                label='詳細',
+                                text='LINEbot 詳細'
+                            ),
                             MessageAction(
                                 label='これにする！',
                                 text='LINEbot'
@@ -103,6 +111,10 @@ def handle_message(event):
                         title='電卓アプリ',
                         text='電卓のアプリを１からFlutterを用いて作成します！',
                         actions=[
+                            MessageAction(
+                                label='詳細',
+                                text='電卓 詳細'
+                            ),
                             MessageAction(
                                 label='これにする！',
                                 text='電卓'
