@@ -92,6 +92,11 @@ def handle_message(event):
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
+                             PostbackAction(
+                                label='postback1',
+                                display_text='postback text1',
+                                data='action=buy&itemid=1'
+                            ),
                             MessageAction(
                                 label='これにする！',
                                 text='LINEbot'
