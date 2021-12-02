@@ -128,7 +128,7 @@ def handle_message(event):
                                 uri='http://example.com/1'
                             )
                         ]
-                    ),
+                    )
                 ]
             )
         )
