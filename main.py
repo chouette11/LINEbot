@@ -95,22 +95,22 @@ def handle_message(event):
         
         columns = [
             CarouselColumn(
-                    thumbnail_image_url=column['thumbnail_image_url'],
-                    title=column['title'],
-                    text=column['text'],
-                    actions=[
-                        MessageAction(
-                            label='詳細',
-                            text=column['title']  + ' 詳細'
-                        ),
-                        MessageAction(
-                            label='これにする！',
-                            text=column['title']
-                        )
-                    ]
-                )
+                thumbnail_image_url=column['thumbnail_image_url'],
+                title=column['title'],
+                text=column['text'],
+                actions=[
+                    MessageAction(
+                        label='詳細',
+                        text=column['title']  + ' 詳細'
+                    ),
+                    MessageAction(
+                        label='これにする！',
+                        text=column['title']
+                    )
+                ]
+            )
 
-                for column in results
+            for column in results
         ]
 
         line_bot_api.reply_message(
