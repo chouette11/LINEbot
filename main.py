@@ -88,7 +88,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/assets/images/java.png',
+                        thumbnail_image_url='https://fathomless-sierra-30007.herokuapp.com/java.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
