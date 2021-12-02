@@ -87,6 +87,23 @@ def callback():
 
 
 @handler.add(MessageEvent, message=TextMessage)
+def intro_carousel(title, description, image_url):
+    CarouselColumn(
+        thumbnail_image_url=image_url,
+        title=title,
+        text=description,
+        actions=[
+            MessageAction(
+                label='詳細',
+                text=title + ' 詳細'
+            ),
+            MessageAction(
+                label='これにする！',
+                text=title
+            )
+        ]
+    ),
+
 def handle_message(event):
     line_bot_api.reply_message(
         event.reply_token,
