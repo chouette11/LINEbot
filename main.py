@@ -94,23 +94,24 @@ def handle_message(event):
         ]
 
         for column in results: 
-            columns = [
-                CarouselColumn(
-                    thumbnail_image_url=column['thumbnail_image_url'],
-                    title=column['title'],
-                    text=column['text'],
-                    actions=[
-                        MessageAction(
-                            label='詳細',
-                            text=column['title']  + ' 詳細'
-                        ),
-                        MessageAction(
-                            label='これにする！',
-                            text=column['title']
-                        )
-                    ]
-                )
-            ]
+            columns = []
+            columns.append(
+            CarouselColumn(
+                thumbnail_image_url=column['thumbnail_image_url'],
+                title=column['title'],
+                text=column['text'],
+                actions=[
+                    MessageAction(
+                        label='詳細',
+                        text=column['title']  + ' 詳細'
+                    ),
+                    MessageAction(
+                        label='これにする！',
+                        text=column['title']
+                    )
+                ]
+            ))
+            
 
         line_bot_api.reply_message(
             event.reply_token,
