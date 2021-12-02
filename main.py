@@ -44,7 +44,10 @@ def get_response_message(mes_from):
     return mes_from
 
 @app.route("/aaa", methods=['POST'])
-def aaa():
+def aaa(event):
+     line_bot_api.reply_message(
+        event.reply_token,
+        TextSendMessage('aaaa'))
 
 
 @app.route("/callback", methods=['POST'])
@@ -81,11 +84,15 @@ def handle_message(event):
                             MessageAction(
                                 label='これにする！',
                                 text='拡張機能'
+                            ),
+                            PostbackAction(
+                                data='aaa',
+                                label='できる？'
                             )
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='~/Java.png',
+                        thumbnail_image_url='https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
