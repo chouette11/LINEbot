@@ -70,10 +70,11 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if (event.message.text == 'chrome拡張機能'):
+
+    if (event.message.text == ('chrome拡張機能' or 'LINEbot' or '電卓アプリ') + ' 詳細'):
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='chrome拡張機能の紹介です'))
+            TextSendMessage(text= event.message.text + 'の紹介です'))
     else:
         results = [ 
             {   
