@@ -86,13 +86,14 @@ def handle_message(event):
                                 text='拡張機能'
                             ),
                             PostbackAction(
-                                data='aaa',
-                                label='できる？'
+                                label='postback1',
+                                display_text='postback text1',
+                                data='action=aaa'
                             )
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
+                        thumbnail_image_url='./Java.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
