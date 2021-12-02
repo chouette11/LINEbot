@@ -85,7 +85,7 @@ def handle_message(event):
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='Java.png',
+                        thumbnail_image_url='~/Java.png',
                         title='LINEbot',
                         text='LINEbotをpythonを用いて作成します！',
                         actions=[
