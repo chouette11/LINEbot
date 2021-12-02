@@ -77,39 +77,6 @@ def handle_message(event):
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
-                        title='chrome拡張機能',
-                        text='chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！',
-                        actions=[
-                            MessageAction(
-                                label='これにする！',
-                                text='拡張機能'
-                            )
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://ascii.jp/img/2020/02/26/2355326/o/7a804288de5f6df7.jpg',
-                        title='LINEbot',
-                        text='LINEbotをpythonを用いて作成します！',
-                        actions=[
-                            MessageAction(
-                                label='これにする！',
-                                text='LINEbot'
-                            )
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://ascii.jp/img/2020/02/26/2355326/o/7a804288de5f6df7.jpg',
-                        title='電卓アプリ',
-                        text='電卓のアプリを１からFlutterを用いて作成します！',
-                        actions=[
-                            MessageAction(
-                                label='これにする！',
-                                text='電卓'
-                            )
-                        ]
-                    ),
-                    CarouselColumn(
                         thumbnail_image_url='https://example.com/item1.jpg',
                         title='this is menu1',
                         text='description1',
