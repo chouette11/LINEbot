@@ -145,9 +145,11 @@ def handle_message(event):
             num += 1
         with get_connection() as conn:
             with conn.cursor() as cur:
+                print(num)
+                print(type(num))
                 try:
                     print('aaa')
-                    cur.execute('update users set program=' + '\''+ num + '\'' + 'where id=' + '\'' + event.source.user_id + '\'')
+                    cur.execute('update users set program='+ num + 'where id=' + '\'' + event.source.user_id + '\'')
                     a = cur.fetchone()
                     print("why?")
                     return a
