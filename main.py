@@ -77,9 +77,11 @@ def handle_message(event):
             [TextSendMessage(text= event.message.text + 'の紹介です'),
              TextSendMessage(text=event.timestamp)])
     elif(re.search('.{1,9}\n\d', event.message.text) != None):
+        print("なんで？？？")
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
+                    print('なんで？？')
                     results = [ 
                         {   
                             "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
