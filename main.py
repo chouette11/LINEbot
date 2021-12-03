@@ -74,7 +74,7 @@ def handle_message(event):
     if (event.message.text == ('chrome拡張機能' or 'LINEbot' or '電卓アプリ') + ' 詳細'):
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text= event.message.text + 'の紹介です'))
+            [TextSendMessage(text= event.message.text + 'の紹介です'), TextSendMessage(text="行けるんじゃね？")])
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
         pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
         num = 0
@@ -87,7 +87,8 @@ def handle_message(event):
                 try:
                     cur.execute('INSERT INTO users (program) VALUES (%s)', (num))
                     cur.execute('SELECT * from product;')
-                    return 
+                    a = cur.fetchone()
+                    return a
                 except:
                     mes = "exception"
                     return mes
