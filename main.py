@@ -71,8 +71,6 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    print("あああ")
-    print(line_bot_api.get_profile(event.source.user_id).time_second)
     if (event.message.text == ('chrome拡張機能' or 'LINEbot' or '電卓アプリ') + ' 詳細'):
         line_bot_api.reply_message(
             event.reply_token,
@@ -120,7 +118,7 @@ def handle_message(event):
                 try:
                     cur.execute('SELECT id FROM users')
                     id_list = cur.fetchall()
-                    id = len(id_list) + 1
+                    id = event.message.source.user_id
                     input = event.message.text.splitlines()
                     cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
                     line_bot_api.reply_message(
@@ -137,6 +135,7 @@ def handle_message(event):
                     return 'error'
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
         pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
+
         num = 0
         for pro in pro_list:
             if (event.message.text == pro):
@@ -145,7 +144,7 @@ def handle_message(event):
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
-                    cur.execute('INSERT INTO users (program) VALUES (%s)', (num,))
+                    cur.execute('update users set program=340 where id=' + event.message.source.user_id)
                     cur.execute('SELECT * from product;')
                     a = cur.fetchone()
                     return a
