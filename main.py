@@ -146,7 +146,7 @@ def handle_message(event):
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
-                    cur.execute('update users set program=' + num + 'where id=' + '\'' + event.message.source.user_id + '\'')
+                    cur.execute('update users set program=' + num + 'where id=' + '\'' + event.source.user_id + '\'')
                     cur.execute('SELECT * from product;')
                     a = cur.fetchone()
                     return a
