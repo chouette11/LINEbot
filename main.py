@@ -1,5 +1,6 @@
 from flask import Flask, request, abort
 
+import re
 from linebot import (
     LineBotApi, WebhookHandler
 )
@@ -70,11 +71,68 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-
     if (event.message.text == ('chrome拡張機能' or 'LINEbot' or '電卓アプリ') + ' 詳細'):
         line_bot_api.reply_message(
             event.reply_token,
-            [TextSendMessage(text= event.message.text + 'の紹介です'), TextSendMessage(text="行けるんじゃね？")])
+            [TextSendMessage(text= event.message.text + 'の紹介です'),
+             TextSendMessage(text=event.timestamp)])
+    elif(re.search('.{1,9}\n\d', event.message.text) != None):
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                results = [ 
+                    {   
+                        "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
+                        "title": 'chrome拡張機能',
+                        "text": "chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！"
+                    },
+                    {
+                        "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/line.png',
+                        "title": 'LINEbot',
+                        "text": "LINEbotをpythonを用いて作成します！"
+                    },
+                    {
+                        "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.jpg',
+                        "title": '電卓アプリ',
+                        "text": "電卓のアプリをFlutterを用いて１から作成します！"
+                    }
+                ]
+
+                columns = []
+                for column in results: 
+                    columns.append(
+                    CarouselColumn(
+                        thumbnail_image_url=column['thumbnail_image_url'],
+                        title=column['title'],
+                        text=column['text'],
+                        actions=[
+                            MessageAction(
+                                label='詳細',
+                                text=column['title']  + ' 詳細'
+                            ),
+                            MessageAction(
+                                label='これにする！',
+                                text=column['title']
+                            )
+                        ]
+                    ))
+                try:
+                    cur.execute('SELECT id FROM users')
+                    id_list = cur.fetchall()
+                    id = len(id_list) + 1
+                    input = event.message.text.splitlines()
+                    cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        [TextSendMessage(text='イベントを選択してください'),
+                        TemplateSendMessage(
+                            alt_text='Carousel template',
+                            template=CarouselTemplate(
+                                columns=columns
+                            )
+                        )]
+                    )
+                except:
+                    return 'error'
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
         pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
         num = 0
@@ -85,59 +143,19 @@ def handle_message(event):
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
-                    cur.execute('INSERT INTO users (program) VALUES (%s)', (num))
+                    cur.execute('INSERT INTO users (program) VALUES (%s)', (num,))
                     cur.execute('SELECT * from product;')
                     a = cur.fetchone()
                     return a
                 except:
                     mes = "exception"
                     return mes
-    else:
-        results = [ 
-            {   
-                "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
-                "title": 'chrome拡張機能',
-                "text": "chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！"
-            },
-            {
-                "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/line.png',
-                "title": 'LINEbot',
-                "text": "LINEbotをpythonを用いて作成します！"
-            },
-            {
-                "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.jpg',
-                "title": '電卓アプリ',
-                "text": "電卓のアプリをFlutterを用いて１から作成します！"
-            }
-        ]
-
-        columns = []
-        for column in results: 
-            columns.append(
-            CarouselColumn(
-                thumbnail_image_url=column['thumbnail_image_url'],
-                title=column['title'],
-                text=column['text'],
-                actions=[
-                    MessageAction(
-                        label='詳細',
-                        text=column['title']  + ' 詳細'
-                    ),
-                    MessageAction(
-                        label='これにする！',
-                        text=column['title']
-                    )
-                ]
-            ))
-            
-
+    else:    
         line_bot_api.reply_message(
             event.reply_token,
-            TemplateSendMessage(
-                alt_text='Carousel template',
-                template=CarouselTemplate(
-                    columns=columns
-                )
+            TextSendMessage(
+                event.reply_token,
+                text='例のように入力してください'
             )
         )
 
