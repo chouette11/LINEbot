@@ -81,58 +81,58 @@ def handle_message(event):
             with conn.cursor() as cur:
                 try:
                     results = [ 
-                    {   
-                        "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
-                        "title": 'chrome拡張機能',
-                        "text": "chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！"
-                    },
-                    {
-                        "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/line.png',
-                        "title": 'LINEbot',
-                        "text": "LINEbotをpythonを用いて作成します！"
-                    },
-                    {
-                        "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.jpg',
-                        "title": '電卓アプリ',
-                        "text": "電卓のアプリをFlutterを用いて１から作成します！"
-                    }
-                ]
+                        {   
+                            "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
+                            "title": 'chrome拡張機能',
+                            "text": "chromeの拡張機能をJavaScriptとhtml,cssを用いて作成します！"
+                        },
+                        {
+                            "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/line.png',
+                            "title": 'LINEbot',
+                            "text": "LINEbotをpythonを用いて作成します！"
+                        },
+                        {
+                            "thumbnail_image_url": 'https://fathomless-sierra-30007.herokuapp.com/static/images/calculation.jpg',
+                            "title": '電卓アプリ',
+                            "text": "電卓のアプリをFlutterを用いて１から作成します！"
+                        }
+                    ]
 
-                columns = []
-                for column in results: 
-                    columns.append(
-                    CarouselColumn(
-                        thumbnail_image_url=column['thumbnail_image_url'],
-                        title=column['title'],
-                        text=column['text'],
-                        actions=[
-                            MessageAction(
-                                label='詳細',
-                                text=column['title']  + ' 詳細'
-                            ),
-                            MessageAction(
-                                label='これにする！',
-                                text=column['title']
-                            )
-                        ]
-                    ))
-                    cur.execute('SELECT id FROM users')
-                    id_list = cur.fetchall()
-                    id = event.message.source.user_id
-                    print(id)
-                    print(type(id))
-                    input = event.message.text.splitlines()
-                    cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
-                    line_bot_api.reply_message(
-                        event.reply_token,
-                        [TextSendMessage(text='イベントを選択してください'),
-                        TemplateSendMessage(
-                            alt_text='Carousel template',
-                            template=CarouselTemplate(
-                                columns=columns
-                            )
-                        )]
-                    )
+                    columns = []
+                    for column in results: 
+                        columns.append(
+                        CarouselColumn(
+                            thumbnail_image_url=column['thumbnail_image_url'],
+                            title=column['title'],
+                            text=column['text'],
+                            actions=[
+                                MessageAction(
+                                    label='詳細',
+                                    text=column['title']  + ' 詳細'
+                                ),
+                                MessageAction(
+                                    label='これにする！',
+                                    text=column['title']
+                                )
+                            ]
+                        ))
+                        cur.execute('SELECT id FROM users')
+                        id_list = cur.fetchall()
+                        id = event.message.source.user_id
+                        print(id)
+                        print(type(id))
+                        input = event.message.text.splitlines()
+                        cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
+                        line_bot_api.reply_message(
+                            event.reply_token,
+                            [TextSendMessage(text='イベントを選択してください'),
+                            TemplateSendMessage(
+                                alt_text='Carousel template',
+                                template=CarouselTemplate(
+                                    columns=columns
+                                )
+                            )]
+                        )
                 except:
                     return 'error'
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
