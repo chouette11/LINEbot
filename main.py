@@ -118,7 +118,7 @@ def handle_message(event):
                         ))
                     print("どうしてなん？")
                     cur.execute('SELECT id FROM users')
-                    id = event.message.source.user_id
+                    id = event.source.user_id
                     print(id)
                     print(type(id))
                     input = event.message.text.splitlines()
