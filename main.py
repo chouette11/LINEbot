@@ -77,11 +77,9 @@ def handle_message(event):
             [TextSendMessage(text= event.message.text + 'の紹介です'),
              TextSendMessage(text=event.timestamp)])
     elif(re.search('.{1,9}\n\d', event.message.text) != None):
-        print("なんで？？？")
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
-                    print('なんで？？')
                     results = [ 
                         {   
                             "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
@@ -118,23 +116,23 @@ def handle_message(event):
                                 )
                             ]
                         ))
-                        cur.execute('SELECT id FROM users')
-                        id_list = cur.fetchall()
-                        id = event.message.source.user_id
-                        print(id)
-                        print(type(id))
-                        input = event.message.text.splitlines()
-                        cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
-                        line_bot_api.reply_message(
-                            event.reply_token,
-                            [TextSendMessage(text='イベントを選択してください'),
-                            TemplateSendMessage(
-                                alt_text='Carousel template',
-                                template=CarouselTemplate(
-                                    columns=columns
-                                )
-                            )]
-                        )
+                    cur.execute('SELECT id FROM users')
+                    id_list = cur.fetchall()
+                    id = event.message.source.user_id
+                    print(id)
+                    print(type(id))
+                    input = event.message.text.splitlines()
+                    cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
+                    line_bot_api.reply_message(
+                        event.reply_token,
+                        [TextSendMessage(text='イベントを選択してください'),
+                        TemplateSendMessage(
+                            alt_text='Carousel template',
+                            template=CarouselTemplate(
+                                columns=columns
+                            )
+                        )]
+                    )
                 except:
                     return 'error'
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
