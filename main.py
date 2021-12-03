@@ -79,7 +79,8 @@ def handle_message(event):
     elif(re.search('.{1,9}\n\d', event.message.text) != None):
         with get_connection() as conn:
             with conn.cursor() as cur:
-                results = [ 
+                try:
+                    results = [ 
                     {   
                         "thumbnail_image_url": 'https://cs-cart.jp/wp-content/uploads/2020/05/chrome0001.png',
                         "title": 'chrome拡張機能',
@@ -115,7 +116,6 @@ def handle_message(event):
                             )
                         ]
                     ))
-                try:
                     cur.execute('SELECT id FROM users')
                     id_list = cur.fetchall()
                     id = event.message.source.user_id
