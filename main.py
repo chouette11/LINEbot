@@ -137,7 +137,7 @@ def handle_message(event):
                     return 'error'
     elif (event.message.text == 'chrome拡張機能' or event.message.text == "LINEbot" or event.message.text == "電卓アプリ"):
         pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
-
+        print(event.source.user_id)
         num = 0
         for pro in pro_list:
             if (event.message.text == pro):
@@ -146,9 +146,11 @@ def handle_message(event):
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
+                    print('aaa')
                     cur.execute('update users set program=' + num + 'where id=' + '\'' + event.source.user_id + '\'')
                     cur.execute('SELECT * from product;')
                     a = cur.fetchone()
+                    print("why?")
                     return a
                 except:
                     mes = "exception"
