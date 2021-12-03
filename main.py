@@ -119,6 +119,8 @@ def handle_message(event):
                     cur.execute('SELECT id FROM users')
                     id_list = cur.fetchall()
                     id = event.message.source.user_id
+                    print(id)
+                    print(type(id))
                     input = event.message.text.splitlines()
                     cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
                     line_bot_api.reply_message(
