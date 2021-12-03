@@ -154,11 +154,7 @@ def handle_message(event):
     else:    
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(
-                event.reply_token,
-                text='例のように入力してください'
-            )
-        )
+            TextSendMessage(text='例のように入力してください'))
 
 if __name__ == "__main__":
 #    app.run()
