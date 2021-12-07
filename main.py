@@ -147,8 +147,7 @@ def handle_message(event):
                 print(num)
                 print(type(num))
                 try:
-                    print('aaa')
-                    cur.execute('update users set program='+ str(num) + 'where id=' + '\'' + event.source.user_id + '\'')
+                    cur.execute('UPDATE users SET program='+ str(num) + 'where id=' + '\'' + event.source.user_id + '\'')
                     line_bot_api.reply_message(
                         event.reply_token,
                         TemplateSendMessage(
@@ -172,7 +171,22 @@ def handle_message(event):
                 except:
                     mes = "exception"
                     return mes
-    else:    
+    elif(event.message.text == "いいよ！"):
+        with get_connection() as conn:
+            with conn.cursor() as cur:
+                pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
+                cur.execute("SELECT name from users where id=\'" + event.source.user_id + "\'")
+                name = cur.fechone()
+                cur.execute("SELECT grade from users where id=\'" + event.source.user_id + "\'")
+                grade = cur.fechone()
+                cur.execute("SELECT program from users where id=\'" + event.source.user_id + "\'")
+                program_num = cur.fechone()
+                program = pro_list[program_num]
+
+                line_bot_api.reply_message(
+                    event.reply_token,
+                    TextSendMessage(text="名前：" + name + "\n学年：" + grade + "\nプログラム：" + program + "\nで送信しました！当日お待ちしております！"))
+    else:       
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='例のように入力してください'))
