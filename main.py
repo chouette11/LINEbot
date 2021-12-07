@@ -184,7 +184,7 @@ def handle_message(event):
 
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text="名前：" + name + "\n学年：" + grade + "\nプログラム：" + program + "\nで送信しました！当日お待ちしております！"))
+                    TextSendMessage(text="名前：" + name + "\n学年：" + str(grade) + "\nプログラム：" + program + "\nで送信しました！当日お待ちしております！"))
     else:       
         line_bot_api.reply_message(
             event.reply_token,
