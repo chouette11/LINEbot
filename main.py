@@ -120,8 +120,9 @@ def handle_message(event):
                     id = event.source.user_id
                     print(id)
                     print(type(id))
-                    input = event.message.text.splitlines()
-                    cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
+                    if (event.message.text != "だめ"):
+                        input = event.message.text.splitlines()
+                        cur.execute('INSERT INTO users (id, name, grade) VALUES (%s, %s, %s)', (id, input[0], input[1],))
                     line_bot_api.reply_message(
                         event.reply_token,
                         [TextSendMessage(text='イベントを選択してください'),
@@ -184,7 +185,7 @@ def handle_message(event):
 
                 line_bot_api.reply_message(
                     event.reply_token,
-                    TextSendMessage(text="名前：" + name + "\n学年：" + str(grade) + "\nプログラム：" + program + "\nで送信しました！当日お待ちしております！"))
+                    TextSendMessage(text="名前：" + name[0] + "\n学年：" + str(grade[0]) + "\nプログラム：" + program + "\nで送信しました！当日お待ちしております！"))
     else:       
         line_bot_api.reply_message(
             event.reply_token,
