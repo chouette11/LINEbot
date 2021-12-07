@@ -76,7 +76,7 @@ def handle_message(event):
             event.reply_token,
             [TextSendMessage(text= event.message.text + 'の紹介です'),
              TextSendMessage(text=event.timestamp)])
-    elif(re.search('.{1,9}\n\d', event.message.text) != None):
+    elif(re.search('.{1,9}\n\d', event.message.text) != None or event.message.text == "だめ"):
         with get_connection() as conn:
             with conn.cursor() as cur:
                 try:
@@ -155,14 +155,13 @@ def handle_message(event):
                                 template=ConfirmTemplate(
                                     text=pro_list[num] + 'でいいですか？',
                                     actions=[
-                                        PostbackAction(
+                                        MessageAction(
                                             label='いいよ！',
-                                            display_text='postback text',
-                                            data='action=buy&itemid=1'
+                                            text='いいよ！'
                                         ),
                                         MessageAction(
                                             label='だめ',
-                                            text='message text'
+                                            text='だめ'
                                         )
                                     ]
                                 )
