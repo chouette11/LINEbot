@@ -175,11 +175,11 @@ def handle_message(event):
             with conn.cursor() as cur:
                 pro_list = ['chrome拡張機能', 'LINEbot', '電卓アプリ']
                 cur.execute("SELECT name from users where id=\'" + event.source.user_id + "\'")
-                name = cur.fechone()
+                name = cur.fetchone()
                 cur.execute("SELECT grade from users where id=\'" + event.source.user_id + "\'")
-                grade = cur.fechone()
+                grade = cur.fetchone()
                 cur.execute("SELECT program from users where id=\'" + event.source.user_id + "\'")
-                program_num = cur.fechone()
+                program_num = cur.fetchone()
                 program = pro_list[program_num]
 
                 line_bot_api.reply_message(
