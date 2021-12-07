@@ -71,7 +71,7 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if (event.message.text == (event.message.text == 'chrome拡張機能 詳細' or event.message.text == "LINEbot 詳細" or event.message.text == "電卓アプリ 詳細")):
+    if (event.message.text == 'chrome拡張機能 詳細' or event.message.text == "LINEbot 詳細" or event.message.text == "電卓アプリ 詳細"):
         line_bot_api.reply_message(
             event.reply_token,
             [TextSendMessage(text= event.message.text + 'の紹介です'),
@@ -157,12 +157,12 @@ def handle_message(event):
                                     text=pro_list[num] + 'でいいですか？',
                                     actions=[
                                         PostbackAction(
-                                            label='postback',
+                                            label='いいよ！',
                                             display_text='postback text',
                                             data='action=buy&itemid=1'
                                         ),
                                         MessageAction(
-                                            label='message',
+                                            label='だめ',
                                             text='message text'
                                         )
                                     ]
