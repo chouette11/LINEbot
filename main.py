@@ -180,7 +180,7 @@ def handle_message(event):
                 grade = cur.fetchone()
                 cur.execute("SELECT program from users where id=\'" + event.source.user_id + "\'")
                 program_num = cur.fetchone()
-                program = pro_list[program_num]
+                program = pro_list[program_num[0]]
 
                 line_bot_api.reply_message(
                     event.reply_token,
